@@ -1,0 +1,15 @@
+version: '3.8'
+name: spring-security-oauth2-microservices-demo
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:22.0.3
+    command: ['start-dev --import-realm']
+    volumes:
+      - ./realm-config:/opt/keycloak/data/import
+    container_name: keycloak
+    hostname: keycloak
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin1234
+    ports:
+      - "9191:8080"
