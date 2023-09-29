@@ -13,6 +13,7 @@
 
 	<modules>
 		<module>messages-webapp</module>
+		<module>messages-service</module>
 	</modules>
 
 </project>
