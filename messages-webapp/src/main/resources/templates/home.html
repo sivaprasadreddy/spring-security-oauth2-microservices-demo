@@ -38,6 +38,29 @@
 </nav>
 <div>
     <h1>Welcome <span th:text="${username}">username</span></h1>
+
+    <div sec:authorize="isAuthenticated()">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" action="/messages">
+                    <div class="mb-3">
+                        <label for="content" class="form-label">Message</label>
+                        <textarea class="form-control" id="content" name="content"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="messages" class="pt-2">
+        <div class="message" th:each="message: ${messages}">
+            <div class="alert alert-light" role="alert">
+                <p th:text="${message.content}">content</p>
+                <p>Posted By: <span th:text="${message.createdBy}">CreatedBy</span></p>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

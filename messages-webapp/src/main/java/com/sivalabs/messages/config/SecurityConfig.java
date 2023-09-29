@@ -30,7 +30,10 @@ public class SecurityConfig {
             )
             .cors(CorsConfigurer::disable)
             .csrf(CsrfConfigurer::disable)
-            .oauth2Login(Customizer.withDefaults())
+            //.oauth2Login(Customizer.withDefaults())
+            .oauth2Login(oauth2 ->
+                oauth2.userInfoEndpoint(userInfo -> userInfo
+                        .userAuthoritiesMapper(new KeycloakAuthoritiesMapper())))
             .logout(logout -> logout
                     .clearAuthentication(true)
                     .invalidateHttpSession(true)
