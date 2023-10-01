@@ -39,10 +39,16 @@ public class HomeController {
     }
 
     @PostMapping("/messages")
-    String createProduct(Message message) {
+    String createMessage(Message message) {
         Map<String, Object> loginUserDetails = SecurityHelper.getLoginUserDetails();
         message.setCreatedBy(loginUserDetails.get("username").toString());
         messageServiceClient.createMessage(message);
+        return "redirect:/";
+    }
+
+    @PostMapping("/messages/archive")
+    String archiveMessages() {
+        messageServiceClient.archiveMessages();
         return "redirect:/";
     }
 }

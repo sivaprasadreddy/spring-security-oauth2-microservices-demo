@@ -53,4 +53,19 @@ public class MessageServiceClient {
             log.error("Error while creating message", e);
         }
     }
+
+    public void archiveMessages() {
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("Authorization", "Bearer " + securityHelper.getAccessToken());
+            HttpEntity<?> httpEntity = new HttpEntity<>(headers);
+            ResponseEntity<Message> response = restTemplate.exchange(
+                    "http://localhost:8282/api/messages/archive", HttpMethod.POST, httpEntity,
+                    new ParameterizedTypeReference<>() {
+                    });
+            log.info("Archive messages response code: {}", response.getStatusCode());
+        } catch (Exception e) {
+            log.error("Error while invoking Archive messages", e);
+        }
+    }
 }

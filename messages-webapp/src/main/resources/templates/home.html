@@ -12,7 +12,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
-    <div class="container-fluid">
+    <div class="container">
         <a class="navbar-brand" href="#">Messages</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -36,9 +36,13 @@
         </div>
     </div>
 </nav>
-<div>
+<div class="container">
     <h1>Welcome <span th:text="${username}">username</span></h1>
-
+    <div class="pt-2 pb-2" sec:authorize="hasRole('ADMIN')">
+        <form method="post" action="/messages/archive">
+            <input class="btn btn-primary" type="submit" value="Archive Messages">
+        </form>
+    </div>
     <div sec:authorize="isAuthenticated()">
         <div class="card">
             <div class="card-body">

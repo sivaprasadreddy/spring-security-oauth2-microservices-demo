@@ -20,7 +20,7 @@ public class SecurityConfig {
             .authorizeHttpRequests(c ->
                 c
                     .requestMatchers(HttpMethod.GET, "/api/messages").permitAll()
-                    .requestMatchers(HttpMethod.POST, "/api/messages/archive").hasAnyRole("ADMIN")
+                    .requestMatchers(HttpMethod.POST, "/api/messages/archive").hasAnyRole("ADMIN", "ADMIN_JOB")
                     .anyRequest().authenticated()
             )
             .sessionManagement(c -> c.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
